@@ -1,4 +1,14 @@
 export default class View {
+  static colors = {
+    '1': 'cyan',
+    '2': 'blue',
+    '3': 'yellow',
+    '4': 'orange',
+    '5': 'green',
+    '6': 'purple',
+    '7': 'red'
+  }
+
   constructor(element, {
     width,
     height,
@@ -24,7 +34,7 @@ export default class View {
     playfield
   }) {
     this.clearScreen();
-    this.renderPlayfield(playfield)
+    this.renderPlayfield(playfield);
 
   }
 
@@ -40,7 +50,7 @@ export default class View {
         const block = line[x];
 
         if (block) {
-          this.renderBlock(x * this.blockWidth, y * this.blockHeight, this.blockWidth, this.blockHeight, 'red');
+          this.renderBlock(x * this.blockWidth, y * this.blockHeight, this.blockWidth, this.blockHeight, View.colors[block]);
         }
       }
     }
@@ -52,6 +62,6 @@ export default class View {
     this.context.lineWidth = 2;
 
     this.context.fillRect(x, y, width, height);
-    this.context.strokeRect(x, y, width, height)
+    this.context.strokeRect(x, y, width, height);
   }
 }
