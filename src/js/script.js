@@ -3,7 +3,7 @@ import View from './modules/view.js';
 
 const root = document.getElementById('root');
 const options = {
-  width: 320,
+  width: 480,
   height: 640,
   rows: 20,
   colums: 10,
@@ -38,3 +38,5 @@ document.addEventListener('keydown', ({
       break;
   }
 });
+
+view.renderEndScreen(game.getState());
