@@ -70,7 +70,8 @@ export default class View {
   }
 
   renderEndScreen({
-    score
+    score,
+    hiscore
   }) {
     this.clearScreen();
 
@@ -79,7 +80,11 @@ export default class View {
     this.context.textAlign = 'center';
     this.context.textBaseline = 'middle';
     this.context.fillText('GAME OVER', this.width / 2, this.height / 2 - 48);
-    this.context.fillText(`Score: ${score}`, this.width / 2, this.height / 2);
+    if (score == hiscore) {
+      this.context.fillText(`It's a new record: ${hiscore}`, this.width / 2, this.height / 2);
+    } else {
+      this.context.fillText(`Score: ${score}`, this.width / 2, this.height / 2);
+    }
     this.context.fillText('Press ENTER to Restart', this.width / 2, this.height / 2 + 48);
   }
 
@@ -115,17 +120,19 @@ export default class View {
   renderPanel({
     level,
     score,
+    hiscore,
     lines,
     nextPiece
   }) {
     this.context.textAlign = 'start';
     this.context.textBaseline = 'top';
     this.context.fillStyle = 'white';
-    this.context.font = '14px "Press start 2P"';
-    this.context.fillText(`Score: ${score}`, this.panelX, this.panelY + 0);
-    this.context.fillText(`Lines: ${lines}`, this.panelX, this.panelY + 24);
-    this.context.fillText(`Level: ${level}`, this.panelX, this.panelY + 48);
-    this.context.fillText(`Next:`, this.panelX, this.panelY + 96);
+    this.context.font = '10px "Press start 2P"';
+    this.context.fillText(`HiScore: ${hiscore}`, this.panelX, this.panelY + 0);
+    this.context.fillText(`Score: ${score}`, this.panelX, this.panelY + 24);
+    this.context.fillText(`Lines: ${lines}`, this.panelX, this.panelY + 48);
+    this.context.fillText(`Level: ${level}`, this.panelX, this.panelY + 72);
+    this.context.fillText(`Next:`, this.panelX, this.panelY + 100);
 
     for (let y = 0; y < nextPiece.blocks.length; y += 1) {
       for (let x = 0; x < nextPiece.blocks[y].length; x += 1) {

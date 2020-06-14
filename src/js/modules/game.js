@@ -43,6 +43,7 @@ export default class Game {
       level: this.level,
       lines: this.lines,
       score: this.score,
+      hiscore: this.hiscore,
       nextPiece: this.nextPiece,
       playfield,
       isGameOver: this.topOut,
@@ -51,6 +52,7 @@ export default class Game {
 
   reset() {
     this.score = 0;
+    this.hiscore = localStorage.getItem('hiscore') || 0;
     this.lines = 0;
     this.topOut = false;
     this.playfield = this.createPlayfield();
@@ -280,6 +282,10 @@ export default class Game {
     if (clearedLines > 0) {
       this.score += Game.points[clearedLines] * (this.level + 1);
       this.lines += clearedLines;
+    }
+    if (this.score > this.hiscore) {
+      localStorage.setItem('hiscore', this.score);
+      this.hiscore = localStorage.getItem('hiscore');
     }
   }
 
