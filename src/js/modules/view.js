@@ -6,7 +6,7 @@ export default class View {
     '4': 'orange',
     '5': 'green',
     '6': 'purple',
-    '7': 'red'
+    '7': 'red',
   }
 
   constructor(element, {
@@ -24,7 +24,7 @@ export default class View {
     this.canvas.height = this.height;
     this.context = this.canvas.getContext('2d');
 
-    this.playfieldBorderWidth = 4;
+    this.playfieldBorderWidth = 2;
     this.playfieldX = this.playfieldBorderWidth;
     this.playfieldY = this.playfieldBorderWidth;
     this.playfieldWidth = this.width * 2 / 3;
@@ -35,12 +35,13 @@ export default class View {
     this.blockWidth = this.playfieldInnerWidth / colums;
     this.blockHeight = this.playfieldInnerHeight / rows;
 
-    this.panelX = this.playfieldWidth + 10;
+    this.panelX = this.playfieldWidth + 5;
     this.panelY = 0;
     this.panelWidth = this.width / 3;
     this.panelHeight = this.height;
 
-    this.element.appendChild(this.canvas);
+    this.element.appendChild(this.canvas)
+
   }
 
   renderMainScreen(state) {
@@ -51,8 +52,8 @@ export default class View {
   }
 
   renderStartScreen() {
-    this.context.fillStyle = 'white';
-    this.context.font = '18px "Press Start 2P"';
+    this.context.fillStyle = 'black';
+    this.context.font = '14px "Press Start 2P"';
     this.context.textAlign = 'center';
     this.context.textBaseline = 'middle';
     this.context.fillText('Press ENTER to Start', this.width / 2, this.height / 2);
@@ -75,7 +76,7 @@ export default class View {
   }) {
     this.clearScreen();
 
-    this.context.fillStyle = 'white';
+    this.context.fillStyle = 'black';
     this.context.font = '18px "Press Start 2P"';
     this.context.textAlign = 'center';
     this.context.textBaseline = 'middle';
@@ -112,7 +113,7 @@ export default class View {
         }
       }
     }
-    this.context.strokeStyle = 'white';
+    this.context.strokeStyle = 'black';
     this.context.lineWidth = this.playfieldBorderWidth;
     this.context.strokeRect(0, 0, this.playfieldWidth, this.playfieldHeight);
   }
@@ -126,13 +127,21 @@ export default class View {
   }) {
     this.context.textAlign = 'start';
     this.context.textBaseline = 'top';
-    this.context.fillStyle = 'white';
+    this.context.fillStyle = 'black';
     this.context.font = '10px "Press start 2P"';
-    this.context.fillText(`HiScore: ${hiscore}`, this.panelX, this.panelY + 0);
-    this.context.fillText(`Score: ${score}`, this.panelX, this.panelY + 24);
-    this.context.fillText(`Lines: ${lines}`, this.panelX, this.panelY + 48);
-    this.context.fillText(`Level: ${level}`, this.panelX, this.panelY + 72);
-    this.context.fillText(`Next:`, this.panelX, this.panelY + 100);
+    this.context.fillText(`HiScore`, this.panelX, this.panelY + 5);
+    this.context.fillText(`${hiscore}`, this.panelX, this.panelY + 20);
+    this.context.fillText(`Score`, this.panelX, this.panelY + 40);
+    this.context.fillText(`${score}`, this.panelX, this.panelY + 55);
+    this.context.fillText(`Lines`, this.panelX, this.panelY + 75);
+    this.context.fillText(`${lines}`, this.panelX, this.panelY + 90);
+    this.context.fillText(`Level`, this.panelX, this.panelY + 110);
+    this.context.fillText(`${level}`, this.panelX, this.panelY + 125);
+    this.context.fillText(`Next`, this.panelX, this.panelY + 145);
+    this.context.fillText(`Music`, this.panelX, this.panelY + 250);
+    this.context.fillText(`Off`, this.panelX, this.panelY + 265);
+    this.context.fillText(`Sound`, this.panelX, this.panelY + 285);
+    this.context.fillText(`Off`, this.panelX, this.panelY + 305);
 
     for (let y = 0; y < nextPiece.blocks.length; y += 1) {
       for (let x = 0; x < nextPiece.blocks[y].length; x += 1) {
@@ -141,7 +150,7 @@ export default class View {
         if (block) {
           this.renderBlock(
             this.panelX + (x * this.blockWidth * 0.5),
-            this.panelY + 100 + (y * this.blockHeight * 0.5),
+            this.panelY + 155 + (y * this.blockHeight * 0.5),
             this.blockWidth * 0.5,
             this.blockHeight * 0.5,
             View.colors[block]
@@ -156,7 +165,7 @@ export default class View {
   renderBlock(x, y, width, height, color) {
     this.context.fillStyle = color;
     this.context.strokeStyle = 'black';
-    this.context.lineWidth = 2;
+    this.context.lineWidth = 1;
 
     this.context.fillRect(x, y, width, height);
     this.context.strokeRect(x, y, width, height);

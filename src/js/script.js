@@ -4,8 +4,8 @@ import Controller from './modules/controller.js';
 
 const root = document.getElementById('root');
 const options = {
-  width: 480,
-  height: 640,
+  width: 240,
+  height: 320,
   rows: 20,
   colums: 10,
 };
