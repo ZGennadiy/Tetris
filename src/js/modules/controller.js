@@ -1,7 +1,9 @@
 export default class Controller {
-  constructor(game, view) {
+  constructor(game, view, sound) {
     this.game = game;
     this.view = view;
+    this.sound = sound;
+
     this.intervalId = null;
     this.isPlaying = false;
 
@@ -22,11 +24,14 @@ export default class Controller {
   updateView() {
     const state = this.game.getState();
     if (state.isGameOver) {
+      this.game.handleMusic(false);
       this.view.renderEndScreen(state);
     } else if (!this.isPlaying) {
+      this.game.handleMusic(false);
       this.view.renderPauseScreen();
     } else {
       this.view.renderMainScreen(state);
+      this.game.playMusic(state.isMusicOn);
     }
   }
 
@@ -39,6 +44,7 @@ export default class Controller {
 
   pause() {
     this.isPlaying = false;
+    this.game.playSoundIndepended('pause');
     this.stopTimer();
     this.updateView();
   }
@@ -124,6 +130,10 @@ export default class Controller {
     target
   }) {
     const state = this.game.getState();
+    const {
+      isSoundOn,
+      isMusicOn
+    } = this.sound.getSoundState();
     const keyId = target.getAttribute('id');
 
     switch (keyId) {
@@ -135,6 +145,22 @@ export default class Controller {
         } else {
           this.play();
         }
+        break;
+      case 'keyMusic':
+        if (isMusicOn) {
+          localStorage.setItem('isMusicOn', false);
+        } else {
+          localStorage.setItem('isMusicOn', true);
+        }
+        this.sound.getSoundState();
+        break;
+      case 'keySound':
+        if (isSoundOn) {
+          localStorage.setItem('isSoundOn', false);
+        } else {
+          localStorage.setItem('isSoundOn', true);
+        }
+        this.sound.getSoundState();
         break;
       case 'keyLeft':
         if (this.isPlaying) {
@@ -162,7 +188,6 @@ export default class Controller {
         break;
       case 'keyDown': // down arrow
         if (this.isPlaying) {
-          // this.stopTimer();
           this.game.movePieceDown();
           this.updateView();
         }

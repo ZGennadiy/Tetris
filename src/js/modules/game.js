@@ -6,7 +6,8 @@ export default class Game {
     '4': 1200,
   };
 
-  constructor() {
+  constructor(sound) {
+    this.sound = sound;
     this.reset();
   }
 
@@ -47,6 +48,8 @@ export default class Game {
       nextPiece: this.nextPiece,
       playfield,
       isGameOver: this.topOut,
+      isSoundOn: this.sound.getSoundState().isSoundOn,
+      isMusicOn: this.sound.getSoundState().isMusicOn,
     };
   }
 
@@ -147,6 +150,8 @@ export default class Game {
     this.activePiece.x -= 1;
     if (this.hasCollision()) {
       this.activePiece.x += 1;
+    } else {
+      this.playSound('whoosh');
     }
   }
 
@@ -154,6 +159,8 @@ export default class Game {
     this.activePiece.x += 1;
     if (this.hasCollision()) {
       this.activePiece.x -= 1;
+    } else {
+      this.playSound('whoosh');
     }
   }
 
@@ -173,6 +180,8 @@ export default class Game {
 
     if (this.hasCollision()) {
       this.topOut = true;
+      this.pauseMusic();
+      this.playSoundEndGame(this.getState());
     }
   }
 
@@ -204,9 +213,10 @@ export default class Game {
           blocks[y - i][y - j] = blocks[y - j][i];
           blocks[y - j][i] = temp;
         }
-
-
       }
+    }
+    if (clockwise) {
+      this.playSound('blockRotate');
     }
   }
 
@@ -246,6 +256,7 @@ export default class Game {
         }
       }
     }
+    this.playSoundIndepended('fall');
   }
 
   clearLines() {
@@ -267,6 +278,7 @@ export default class Game {
         continue;
       } else if (numberOfBlocks === colums) {
         lines.unshift(y);
+        this.playSoundIndepended('clear');
       }
     }
 
@@ -292,5 +304,61 @@ export default class Game {
   updatePieces() {
     this.activePiece = this.nextPiece;
     this.nextPiece = this.createPiece();
+  }
+
+  handleMusic(music) {
+    if (music) {
+      this.sound.getSound().tetrisMain.play();
+    } else {
+      this.sound.getSound().tetrisMain.pause();
+    }
+  }
+
+  playMusic() {
+    if (this.sound.getSoundState().isMusicOn) {
+      this.sound.getSound().tetrisMain.play();
+    } else {
+      this.sound.getSound().tetrisMain.pause();
+      this.sound.getSound().tetrisMain.currentTime = 0;
+    }
+  }
+  pauseMusic() {
+    if (this.sound.getSoundState().isMusicOn) {
+      this.sound.getSound().tetrisMain.pause();
+    }
+  }
+  // stopMusic() {
+  //   if (!this.sound.getSoundState().isMusicOn) {
+  //     this.sound.getSound().tetrisMain.pause();
+  //     this.sound.getSound().tetrisMain.currentTime = 0;
+  //   }
+  // }
+
+  playSound(sound) {
+    if (this.sound.getSoundState().isSoundOn && !this.hasCollision()) {
+      this.sound.getSound()[sound].play();
+    }
+  }
+
+  playSoundIndepended(sound) {
+    if (this.sound.getSoundState().isSoundOn) {
+      this.sound.getSound()[sound].play();
+    }
+  }
+
+  playSoundEndGame({
+    score,
+    hiscore
+  }) {
+    const {
+      success,
+      gameover
+    } = this.sound.getSound();
+
+    if (this.sound.getSoundState().isSoundOn && score == hiscore) {
+      success.play();
+    } else if (this.sound.getSoundState().isSoundOn && score != hiscore) {
+      gameover.play();
+    }
   }
 }

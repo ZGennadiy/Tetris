@@ -14,8 +14,9 @@ export default class View {
     height,
     rows,
     colums
-  }) {
+  }, sound) {
     this.element = element;
+    this.sound = sound;
     this.width = width;
     this.height = height;
 
@@ -40,7 +41,7 @@ export default class View {
     this.panelWidth = this.width / 3;
     this.panelHeight = this.height;
 
-    this.element.appendChild(this.canvas)
+    this.element.appendChild(this.canvas);
 
   }
 
@@ -123,7 +124,9 @@ export default class View {
     score,
     hiscore,
     lines,
-    nextPiece
+    nextPiece,
+    isSoundOn,
+    isMusicOn
   }) {
     this.context.textAlign = 'start';
     this.context.textBaseline = 'top';
@@ -139,9 +142,17 @@ export default class View {
     this.context.fillText(`${level}`, this.panelX, this.panelY + 125);
     this.context.fillText(`Next`, this.panelX, this.panelY + 145);
     this.context.fillText(`Music`, this.panelX, this.panelY + 250);
-    this.context.fillText(`Off`, this.panelX, this.panelY + 265);
+    if (isMusicOn) {
+      this.context.fillText(`On`, this.panelX, this.panelY + 265);
+    } else {
+      this.context.fillText(`Off`, this.panelX, this.panelY + 265);
+    }
     this.context.fillText(`Sound`, this.panelX, this.panelY + 285);
-    this.context.fillText(`Off`, this.panelX, this.panelY + 305);
+    if (isSoundOn) {
+      this.context.fillText(`On`, this.panelX, this.panelY + 305);
+    } else {
+      this.context.fillText(`Off`, this.panelX, this.panelY + 305);
+    }
 
     for (let y = 0; y < nextPiece.blocks.length; y += 1) {
       for (let x = 0; x < nextPiece.blocks[y].length; x += 1) {
