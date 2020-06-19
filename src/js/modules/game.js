@@ -306,24 +306,13 @@ export default class Game {
     this.nextPiece = this.createPiece();
   }
 
-  handleMusic(music) {
+  playMusic(music = true) {
     if (music) {
       this.sound.getSound().tetrisMain.play();
-    } else {
-      this.sound.getSound().tetrisMain.pause();
     }
   }
-
-  playMusic() {
-    if (this.sound.getSoundState().isMusicOn) {
-      this.sound.getSound().tetrisMain.play();
-    } else {
-      this.sound.getSound().tetrisMain.pause();
-      this.sound.getSound().tetrisMain.currentTime = 0;
-    }
-  }
-  pauseMusic() {
-    if (this.sound.getSoundState().isMusicOn) {
+  pauseMusic(music = true) {
+    if (music) {
       this.sound.getSound().tetrisMain.pause();
     }
   }

@@ -24,14 +24,11 @@ export default class Controller {
   updateView() {
     const state = this.game.getState();
     if (state.isGameOver) {
-      this.game.handleMusic(false);
       this.view.renderEndScreen(state);
     } else if (!this.isPlaying) {
-      this.game.handleMusic(false);
       this.view.renderPauseScreen();
     } else {
       this.view.renderMainScreen(state);
-      this.game.playMusic(state.isMusicOn);
     }
   }
 
@@ -51,6 +48,7 @@ export default class Controller {
 
   reset() {
     this.game.reset();
+    this.game.playMusic(this.game.getState().isMusicOn);
     this.play();
   }
 
@@ -74,16 +72,39 @@ export default class Controller {
   handleKeyDown({
     keyCode
   }) {
-    const state = this.game.getState();
+    const {
+      isSoundOn,
+      isMusicOn,
+      isGameOver
+    } = this.game.getState();
 
     switch (keyCode) {
-      case 13: // Enter
-        if (state.isGameOver) {
+      case 80: // Key P
+        if (isGameOver) {
           this.reset();
+          this.game.playMusic(isMusicOn);
         } else if (this.isPlaying) {
+          this.game.pauseMusic(isMusicOn);
           this.pause();
         } else {
+          this.game.playMusic(isMusicOn);
           this.play();
+        }
+        break;
+      case 77: // Key M
+        if (this.isPlaying && isMusicOn) {
+          localStorage.setItem('isMusicOn', false);
+          this.game.pauseMusic();
+        } else if (this.isPlaying) {
+          localStorage.setItem('isMusicOn', true);
+          this.game.playMusic();
+        }
+        break;
+      case 83: // Key S
+        if (this.isPlaying && isSoundOn) {
+          localStorage.setItem('isSoundOn', false);
+        } else if (this.isPlaying) {
+          localStorage.setItem('isSoundOn', true);
         }
         break;
       case 37: // left arrow
@@ -129,38 +150,41 @@ export default class Controller {
   handleClick({
     target
   }) {
-    const state = this.game.getState();
     const {
       isSoundOn,
-      isMusicOn
-    } = this.sound.getSoundState();
+      isMusicOn,
+      isGameOver
+    } = this.game.getState();
     const keyId = target.getAttribute('id');
 
     switch (keyId) {
       case 'keyStart':
-        if (state.isGameOver) {
+        if (isGameOver) {
+          this.game.playMusic(isMusicOn);
           this.reset();
         } else if (this.isPlaying) {
+          this.game.pauseMusic(isMusicOn);
           this.pause();
         } else {
+          this.game.playMusic(isMusicOn);
           this.play();
         }
         break;
       case 'keyMusic':
-        if (isMusicOn) {
+        if (this.isPlaying && isMusicOn) {
           localStorage.setItem('isMusicOn', false);
-        } else {
+          this.game.pauseMusic();
+        } else if (this.isPlaying) {
           localStorage.setItem('isMusicOn', true);
+          this.game.playMusic();
         }
-        this.sound.getSoundState();
         break;
       case 'keySound':
-        if (isSoundOn) {
+        if (this.isPlaying && isSoundOn) {
           localStorage.setItem('isSoundOn', false);
-        } else {
+        } else if (this.isPlaying) {
           localStorage.setItem('isSoundOn', true);
         }
-        this.sound.getSoundState();
         break;
       case 'keyLeft':
         if (this.isPlaying) {

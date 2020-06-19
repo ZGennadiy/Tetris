@@ -49,7 +49,6 @@ export default class View {
     this.clearScreen();
     this.renderPlayfield(state);
     this.renderPanel(state);
-
   }
 
   renderStartScreen() {
@@ -57,7 +56,7 @@ export default class View {
     this.context.font = '14px "Press Start 2P"';
     this.context.textAlign = 'center';
     this.context.textBaseline = 'middle';
-    this.context.fillText('Press ENTER to Start', this.width / 2, this.height / 2);
+    this.context.fillText('Press "P" or "Start" to Start', this.width / 2, this.height / 2);
   }
 
   renderPauseScreen() {
@@ -68,7 +67,7 @@ export default class View {
     this.context.font = '18px "Press Start 2P"';
     this.context.textAlign = 'center';
     this.context.textBaseline = 'middle';
-    this.context.fillText('Press ENTER to Resume', this.width / 2, this.height / 2);
+    this.context.fillText('Press "P" or "Start" to Resume', this.width / 2, this.height / 2);
   }
 
   renderEndScreen({
@@ -87,7 +86,7 @@ export default class View {
     } else {
       this.context.fillText(`Score: ${score}`, this.width / 2, this.height / 2);
     }
-    this.context.fillText('Press ENTER to Restart', this.width / 2, this.height / 2 + 48);
+    this.context.fillText('Press "P" or "Start" to Restart', this.width / 2, this.height / 2 + 48);
   }
 
   clearScreen() {

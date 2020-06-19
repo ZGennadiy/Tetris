@@ -10,13 +10,29 @@ body {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   min-height: 100vh;
   background: url("../img/cover.jpg") center center/cover no-repeat;
+}
+
+.unselectable {
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Chrome/Safari/Opera */
+  -khtml-user-select: none;
+  /* Konqueror */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently
+                                  not supported by any browser */
 }
 
 .gameboy {
@@ -25,7 +41,7 @@ body {
   width: 320px;
   padding: 10px;
   -webkit-box-shadow: 0 0px 30px rgba(0, 0, 0, 0.9), inset 0 0px 15px rgba(0, 0, 0, 0.7);
-          box-shadow: 0 0px 30px rgba(0, 0, 0, 0.9), inset 0 0px 15px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 0px 30px rgba(0, 0, 0, 0.9), inset 0 0px 15px rgba(0, 0, 0, 0.7);
 }
 
 .gameboy__controlblock {
@@ -33,8 +49,8 @@ body {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
   margin: 50px 20px 50px 20px;
 }
 
@@ -43,8 +59,8 @@ body {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
+  -ms-flex-pack: space-evenly;
+  justify-content: space-evenly;
 }
 
 .gameboy__keys_options {
@@ -54,14 +70,14 @@ body {
 .gameboy__keys_control {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .gameboy__keys_control-wrapper {
@@ -82,12 +98,12 @@ body {
   border: 1px solid black;
   outline: none;
   -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
-          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
 }
 
 .gameboy__key:active {
   -webkit-box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.7);
-          box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.7);
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.7);
 }
 
 .gameboy__key-wrapper {
@@ -96,14 +112,14 @@ body {
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .gameboy__key_option {
@@ -147,8 +163,8 @@ body {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
   font-size: 10px;
 }
 
@@ -168,14 +184,14 @@ body {
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .gameboy #root h1 {
@@ -188,6 +204,7 @@ body {
   margin: 0;
   background-color: grey;
   -webkit-box-shadow: inset 0 0px 5px rgba(0, 0, 0, 0.7);
-          box-shadow: inset 0 0px 5px rgba(0, 0, 0, 0.7);
+  box-shadow: inset 0 0px 5px rgba(0, 0, 0, 0.7);
 }
+
 /*# sourceMappingURL=style.css.map */
