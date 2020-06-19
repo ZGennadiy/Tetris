@@ -53,10 +53,12 @@ export default class View {
 
   renderStartScreen() {
     this.context.fillStyle = 'black';
-    this.context.font = '14px "Press Start 2P"';
+    this.context.font = '18px "Press Start 2P"';
     this.context.textAlign = 'center';
     this.context.textBaseline = 'middle';
-    this.context.fillText('Press "P" or "Start" to Start', this.width / 2, this.height / 2);
+    this.context.fillText('Press "P"', this.width / 2, this.height / 2 - 36);
+    this.context.fillText('or "Start"', this.width / 2, this.height / 2);
+    this.context.fillText('to Play', this.width / 2, this.height / 2 + 36);
   }
 
   renderPauseScreen() {
@@ -67,7 +69,9 @@ export default class View {
     this.context.font = '18px "Press Start 2P"';
     this.context.textAlign = 'center';
     this.context.textBaseline = 'middle';
-    this.context.fillText('Press "P" or "Start" to Resume', this.width / 2, this.height / 2);
+    this.context.fillText('Press "P"', this.width / 2, this.height / 2 - 36);
+    this.context.fillText('or "Start"', this.width / 2, this.height / 2);
+    this.context.fillText('to Resume', this.width / 2, this.height / 2 + 36);
   }
 
   renderEndScreen({
@@ -77,16 +81,20 @@ export default class View {
     this.clearScreen();
 
     this.context.fillStyle = 'black';
-    this.context.font = '18px "Press Start 2P"';
+    this.context.font = '14px "Press Start 2P"';
     this.context.textAlign = 'center';
     this.context.textBaseline = 'middle';
-    this.context.fillText('GAME OVER', this.width / 2, this.height / 2 - 48);
-    if (score == hiscore) {
-      this.context.fillText(`It's a new record: ${hiscore}`, this.width / 2, this.height / 2);
+    this.context.fillText('GAME OVER', this.width / 2, this.height / 2 - 110);
+    if (score == hiscore && hiscore != 0) {
+      this.context.fillText(`New high score`, this.width / 2, this.height / 2 - 48);
+      this.context.fillText(`${hiscore}`, this.width / 2, this.height / 2 - 12);
     } else {
-      this.context.fillText(`Score: ${score}`, this.width / 2, this.height / 2);
+      this.context.fillText(`Score:`, this.width / 2, this.height / 2 - 48);
+      this.context.fillText(`${score}`, this.width / 2, this.height / 2 - 12);
     }
-    this.context.fillText('Press "P" or "Start" to Restart', this.width / 2, this.height / 2 + 48);
+    this.context.fillText('Press "P"', this.width / 2, this.height / 2 + 46);
+    this.context.fillText('or "Start"', this.width / 2, this.height / 2 + 82);
+    this.context.fillText('to Restart', this.width / 2, this.height / 2 + 118);
   }
 
   clearScreen() {
