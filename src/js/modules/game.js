@@ -316,12 +316,6 @@ export default class Game {
       this.sound.getSound().tetrisMain.pause();
     }
   }
-  // stopMusic() {
-  //   if (!this.sound.getSoundState().isMusicOn) {
-  //     this.sound.getSound().tetrisMain.pause();
-  //     this.sound.getSound().tetrisMain.currentTime = 0;
-  //   }
-  // }
 
   playSound(sound) {
     if (this.sound.getSoundState().isSoundOn && !this.hasCollision()) {

@@ -11,28 +11,13 @@ export default class Sound {
   };
 
 
-  constructor(parentNode
-    //   , {
-    //   main,
-    //   pause,
-    //   rotate,
-    //   whoosh,
-    //   fall,
-    //   clear,
-    //   gameover,
-    //   success
-    // }
-  ) {
+  constructor(parentNode) {
     this.parentNode = parentNode;
 
     const soundCol = Object.keys(Sound.sounds);
     soundCol.forEach(function (sound) {
       this.handleAudio(this.parentNode, Sound.sounds[sound]);
     }, this);
-    // [main, pause, rotate, whoosh, fall, clear, gameover, success].forEach(function (sound) {
-    //   this.handleAudio(this.parentNode, sound);
-    // }, this);
-
   }
 
   getSoundState() {
